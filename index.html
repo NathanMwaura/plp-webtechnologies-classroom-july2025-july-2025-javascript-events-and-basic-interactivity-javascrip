@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Digital Learning Hub - Interactive Assignment</title>
+  <meta name="description" content="Interactive web development assignment demonstrating JavaScript fundamentals" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js"></script>
+</head>
+
+<body>
+  <!-- Theme Toggle Button -->
+  <button class="theme-toggle" onclick="toggleDarkMode()" title="Toggle Dark Mode">
+    🌙
+  </button>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">Digital Learning Hub</div>
+        <nav>
+          <ul class="nav">
+            <li><a href="#events">Events</a></li>
+            <li><a href="#interactive">Interactive</a></li>
+            <li><a href="#validation">Forms</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      
+      <!-- PART 1: Event Handling -->
+      <section id="events" class="section">
+        <h2 class="section-title">Part 1: JavaScript Event Handling</h2>
+        <p class="section-subtitle">Responding to user interactions with event listeners</p>
+        
+        <div class="features-grid">
+          <!-- Click Events -->
+          <div class="card">
+            <h3>🖱️ Click Events</h3>
+            <p>Different types of click interactions and responses.</p>
+            <div style="margin-top: 1rem;">
+              <button class="btn" onclick="handleSingleClick(this)">Single Click</button>
+              <button class="btn btn-secondary" ondblclick="handleDoubleClick(this)" style="margin-left: 0.5rem;">Double Click</button>
+            </div>
+            <div id="click-feedback" style="margin-top: 1rem; padding: 1rem; background: #f3f4f6; border-radius: 8px; display: none;"></div>
+          </div>
+
+          <!-- Keyboard Events -->
+          <div class="card">
+            <h3>⌨️ Keyboard Events</h3>
+            <p>Capturing and responding to keyboard input.</p>
+            <input type="text" 
+                   placeholder="Type something..." 
+                   style="width: 100%; padding: 0.75rem; border: 2px solid #e5e7eb; border-radius: 8px; margin-top: 1rem;"
+                   onkeydown="handleKeyDown(event)"
+                   onkeyup="handleKeyUp(event)">
+            <div id="key-feedback" style="margin-top: 1rem; font-family: monospace; background: #f3f4f6; padding: 1rem; border-radius: 8px; min-height: 60px;"></div>
+          </div>
+
+          <!-- Mouse Events -->
+          <div class="card">
+            <h3>🐭 Mouse Events</h3>
+            <p>Tracking mouse movements and interactions.</p>
+            <div id="mouse-area" 
+                 style="width: 100%; height: 150px; background: linear-gradient(45deg, #3b82f6, #10b981); border-radius: 8px; margin-top: 1rem; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer;"
+                 onmouseenter="handleMouseEnter(this)"
+                 onmouseleave="handleMouseLeave(this)"
+                 onmousemove="handleMouseMove(event, this)">
+              Hover over me!
+            </div>
+            <div id="mouse-coordinates" style="margin-top: 1rem; font-family: monospace; color: #6b7280;"></div>
+          </div>
+
+          <!-- Form Events -->
+          <div class="card">
+            <h3>📝 Form Events</h3>
+            <p>Real-time form interaction feedback.</p>
+            <select onchange="handleSelectChange(this)" style="width: 100%; padding: 0.75rem; border: 2px solid #e5e7eb; border-radius: 8px; margin-top: 1rem;">
+              <option value="">Choose your favorite...</option>
+              <option value="javascript">JavaScript</option>
+              <option value="html">HTML</option>
+              <option value="css">CSS</option>
+              <option value="python">Python</option>
+            </select>
+            <input type="range" 
+                   min="0" max="100" value="50"
+                   oninput="handleRangeInput(this)"
+                   style="width: 100%; margin-top: 1rem;">
+            <div id="form-feedback" style="margin-top: 1rem; padding: 1rem; background: #f3f4f6; border-radius: 8px;"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PART 2: Interactive Elements -->
+      <section id="interactive" class="section">
+        <h2 class="section-title">Part 2: Interactive Elements</h2>
+        <p class="section-subtitle">Dynamic components built with JavaScript</p>
+        
+        <div class="features-grid">
+          <!-- Counter Game -->
+          <div class="card">
+            <h3>🔢 Interactive Counter</h3>
+            <p>A counter with multiple interaction modes and animations.</p>
+            <div class="counter-display" id="counter-display">0</div>
+            <div class="counter-controls">
+              <button class="btn btn-success" onclick="incrementCounter(1)">+1</button>
+              <button class="btn btn-success" onclick="incrementCounter(5)">+5</button>
+              <button class="btn btn-danger" onclick="decrementCounter(1)">-1</button>
+              <button class="btn btn-danger" onclick="decrementCounter(5)">-5</button>
+              <button class="btn btn-secondary" onclick="resetCounter()">Reset</button>
+            </div>
+            <div style="margin-top: 1rem; text-align: center;">
+              <small>Current streak: <span id="counter-streak">0</span> | High score: <span id="counter-high">0</span></small>
+            </div>
+          </div>
+
+          <!-- FAQ Section -->
+          <div class="card">
+            <h3>❓ Collapsible FAQ</h3>
+            <p>Expandable frequently asked questions.</p>
+            <div class="faq-container" style="margin-top: 1rem;">
+              <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(0)">
+                  What is JavaScript?
+                  <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-answer">
+                  JavaScript is a programming language that enables interactive web pages and dynamic user experiences.
+                </div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(1)">
+                  How do event listeners work?
+                  <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-answer">
+                  Event listeners wait for specific events (like clicks or key presses) and execute functions when those events occur.
+                </div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(2)">
+                  What is DOM manipulation?
+                  <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-answer">
+                  DOM manipulation involves changing the structure, style, or content of HTML elements using JavaScript after the page loads.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab Interface -->
+          <div class="card">
+            <h3>📑 Tabbed Interface</h3>
+            <p>Switch between different content panels.</p>
+            <div class="tab-container">
+              <div class="tab-list">
+                <button class="tab active" onclick="switchTab(0)">HTML</button>
+                <button class="tab" onclick="switchTab(1)">CSS</button>
+                <button class="tab" onclick="switchTab(2)">JavaScript</button>
+              </div>
+              <div class="tab-content active" id="tab-0">
+                <h4>HTML (HyperText Markup Language)</h4>
+                <p>HTML provides the structure and content of web pages using elements and tags. It's the foundation of every website.</p>
+              </div>
+              <div class="tab-content" id="tab-1">
+                <h4>CSS (Cascading Style Sheets)</h4>
+                <p>CSS controls the visual presentation of HTML elements, including layout, colors, fonts, and animations.</p>
+              </div>
+              <div class="tab-content" id="tab-2">
+                <h4>JavaScript</h4>
+                <p>JavaScript adds interactivity and dynamic behavior to web pages, making them responsive to user actions.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Progress Tracker -->
+          <div class="card">
+            <h3>📊 Progress Tracker</h3>
+            <p>Visual progress indicator with interactive controls.</p>
+            <div class="progress-container">
+              <div class="progress-bar" id="progress-bar">0%</div>
+            </div>
+            <div style="display: flex; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap; justify-content: center;">
+              <button class="btn btn-success" onclick="updateProgress(10)">+10%</button>
+              <button class="btn btn-success" onclick="updateProgress(25)">+25%</button>
+              <button class="btn btn-danger" onclick="updateProgress(-10)">-10%</button>
+              <button class="btn btn-secondary" onclick="updateProgress(0, true)">Reset</button>
+              <button class="btn" onclick="updateProgress(100, true)">Complete</button>
+            </div>
+          </div>
+
+          <!-- Dropdown Menu -->
+          <div class="card">
+            <h3>📋 Dropdown Menu</h3>
+            <p>Custom dropdown with smooth animations.</p>
+            <div class="dropdown" style="margin-top: 1rem;">
+              <button class="dropdown-button" onclick="toggleDropdown()">
+                Choose Action ▼
+              </button>
+              <div class="dropdown-content" id="dropdown-menu">
+                <a href="#" class="dropdown-item" onclick="handleDropdownAction('save')">💾 Save Project</a>
+                <a href="#" class="dropdown-item" onclick="handleDropdownAction('export')">📤 Export Data</a>
+                <a href="#" class="dropdown-item" onclick="handleDropdownAction('import')">📥 Import File</a>
+                <a href="#" class="dropdown-item" onclick="handleDropdownAction('settings')">⚙️ Settings</a>
+              </div>
+            </div>
+            <div id="dropdown-feedback" style="margin-top: 1rem; padding: 1rem; background: #f3f4f6; border-radius: 8px; display: none;"></div>
+          </div>
+
+          <!-- Color Picker Game -->
+          <div class="card">
+            <h3>🎨 Color Memory Game</h3>
+            <p>Remember and match the color sequence!</p>
+            <div id="color-game" style="margin-top: 1rem;">
+              <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; margin-bottom: 1rem;">
+                <div class="color-button" data-color="red" style="height: 60px; background: #ef4444; border-radius: 8px; cursor: pointer; transition: all 0.3s ease;" onclick="colorGameClick('red')"></div>
+                <div class="color-button" data-color="blue" style="height: 60px; background: #3b82f6; border-radius: 8px; cursor: pointer; transition: all 0.3s ease;" onclick="colorGameClick('blue')"></div>
+                <div class="color-button" data-color="green" style="height: 60px; background: #10b981; border-radius: 8px; cursor: pointer; transition: all 0.3s ease;" onclick="colorGameClick('green')"></div>
+                <div class="color-button" data-color="yellow" style="height: 60px; background: #f59e0b; border-radius: 8px; cursor: pointer; transition: all 0.3s ease;" onclick="colorGameClick('yellow')"></div>
+              </div>
+              <div style="text-align: center;">
+                <button class="btn" onclick="startColorGame()">Start Game</button>
+                <div id="color-game-status" style="margin-top: 1rem; font-weight: bold;">Press Start to begin!</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PART 3: Form Validation -->
+      <section id="validation" class="section">
+        <h2 class="section-title">Part 3: Form Validation</h2>
+        <p class="section-subtitle">Real-time validation with custom JavaScript logic</p>
+        
+        <div class="form-container">
+          <form id="registration-form" onsubmit="handleFormSubmit(event)">
+            <div class="form-group">
+              <label for="fullname">Full Name *</label>
+              <input type="text" 
+                     id="fullname" 
+                     name="fullname" 
+                     required
+                     oninput="validateField('fullname')"
+                     onblur="validateField('fullname')">
+              <div class="error-message" id="fullname-error"></div>
+              <div class="success-message" id="fullname-success"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input type="email" 
+                     id="email" 
+                     name="email" 
+                     required
+                     oninput="validateField('email')"
+                     onblur="validateField('email')">
+              <div class="error-message" id="email-error"></div>
+              <div class="success-message" id="email-success"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" 
+                     id="phone" 
+                     name="phone"
+                     placeholder="+254 700 000 000"
+                     oninput="validateField('phone')"
+                     onblur="validateField('phone')">
+              <div class="error-message" id="phone-error"></div>
+              <div class="success-message" id="phone-success"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password *</label>
+              <input type="password" 
+                     id="password" 
+                     name="password" 
+                     required
+                     oninput="validateField('password')"
+                     onblur="validateField('password')">
+              <div class="error-message" id="password-error"></div>
+              <div class="success-message" id="password-success"></div>
+              <small style="color: #6b7280; font-size: 0.875rem;">Must be at least 8 characters with uppercase, lowercase, number, and special character.</small>
+            </div>
+
+            <div class="form-group">
+              <label for="confirm-password">Confirm Password *</label>
+              <input type="password" 
+                     id="confirm-password" 
+                     name="confirm-password" 
+                     required
+                     oninput="validateField('confirm-password')"
+                     onblur="validateField('confirm-password')">
+              <div class="error-message" id="confirm-password-error"></div>
+              <div class="success-message" id="confirm-password-success"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="age">Age</label>
+              <input type="number" 
+                     id="age" 
+                     name="age" 
+                     min="13" 
+                     max="120"
+                     oninput="validateField('age')"
+                     onblur="validateField('age')">
+              <div class="error-message" id="age-error"></div>
+              <div class="success-message" id="age-success"></div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+              <button type="submit" class="btn" style="padding: 1rem 2rem; font-size: 1.1rem;">
+                Register Account
+              </button>
+            </div>
+          </form>
+
+          <div id="form-success-message" style="display: none; text-align: center; margin-top: 2rem; padding: 2rem; background: #d1fae5; color: #065f46; border-radius: 8px; font-weight: bold;">
+            🎉 Registration successful! Welcome to Digital Learning Hub!
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
